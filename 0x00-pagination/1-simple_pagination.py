@@ -2,10 +2,10 @@
 """ Simple helper function """
 import csv
 import math
-from typing import List
+from typing import List, Tuple
 
 
-def index_range(page: int, page_size: int) -> tuple:
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """ Return a tuple of size two containing a start index and an end index
         corresponding to the range of indexes to return in a list for those
         particular pagination parameters.
@@ -36,11 +36,12 @@ class Server:
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """ Get page from dataset """
+        assert type(page) is int and page > 0
+        assert type(page_size) is int and page_size > 0
+        data = self.dataset()
+
         try:
-            assert (page > 0 or page_size > 0)
-            assert (type(page) is int or type(page_size) is int)
-            pages = index_range(page, page_size)
-            dataset = self.dataset()[pages[0]:pages[1]]
-            return dataset
-        except Exception:
+            start, end = index_range(page, page_size)
+            return data[start:end]
+        except IndexError:
             return []
