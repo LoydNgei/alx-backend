@@ -30,8 +30,7 @@ def get_user():
     login_id = request.args.get('login_as')
     if login_id:
         return users.get(int(login_id))
-    else:
-        return None
+    return None
 
 
 @app.before_request
@@ -55,7 +54,7 @@ def get_locale():
 @app.route('/')
 def index():
     """Render index.html"""
-    return render_template('4-index.html')
+    return render_template('5-index.html')
 
 
 if __name__ == '__main__':
