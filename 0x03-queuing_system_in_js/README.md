@@ -1,0 +1,1 @@
+Today we look at ReDis, A remote Dictionaty server that acts as a NoSQL(Key and Value) database and a memory-cache
